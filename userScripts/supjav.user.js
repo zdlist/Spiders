@@ -134,20 +134,38 @@ console.log(JSON.stringify(GM_info));
                     const name = $(this).text().trim();
                     tags.push(`[a=cr:{"id":"${id}","name":"${name}"}/]#${name}[/a]`);
                 });
-
+                let vodContent = $(".post-meta .img").attr("alt").trim();
+                let vodName = vodContent.replace("[无码破解]", '');
+                let match = vodName.match(/^[\w|-]+/g);
+                if (match) {
+                    if (match[0].includes("-")) {
+                        vodName = match[0];
+                    } else {
+                        match = vodContent.match(/^[\w]+\s[\w]+/g);
+                        if (match) {
+                            vodName = match[0].replace(" ", "-");
+                        }
+                    }
+                }
                 const result = {
                     list: [{
                         vod_id: ids[0],
-                        vod_name: $(".post-meta .img").attr("alt"),
+                        vod_name: vodName,
                         vod_pic: $(".post-meta .img").attr("src"),
                         vod_actor: vodActor.join(" "),
                         vod_remarks: tags.join(" "),
-                        vod_content: $(".post-meta .img").attr("alt"),
-                        vod_play_from: "Supjav",
-                        vod_play_url: "1080P$@{playUrl}",
+                        vod_content: vodContent,
+                        vod_play_data: [{
+                            from: "Supjav",
+                            url: [{
+                                name: "1080P",
+                                value: {
+                                    type: "match"
+                                }
+                            }]
+                        }]
                     }]
                 };
-                console.log(result);
                 return result
             },
             searchContent: function (key, quick, pg) {
