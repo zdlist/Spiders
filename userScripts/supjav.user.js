@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name         Supjav
 // @namespace    gmspider
-// @version      2024.11.21
+// @version      2024.12.02
 // @description  Supjav GMSpider
 // @author       Luomo
 // @match        https://supjav.com/*
-// @require      https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js
+// @require      https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.slim.min.js
 // ==/UserScript==
 console.log(JSON.stringify(GM_info));
 (function () {
@@ -147,6 +147,28 @@ console.log(JSON.stringify(GM_info));
                         }
                     }
                 }
+                let playUrl = [];
+                let btnServers;
+                if ($(".video-wrap .cd-server").length > 0) {
+                    btnServers = $(".video-wrap .cd-server:first .btn-server");
+                } else {
+                    btnServers = $(".video-wrap .btn-server");
+
+                }
+                btnServers.each(function () {
+                    playUrl.push({
+                        name: $(this).text().trim(),
+                        value: {
+                            type: "webview",
+                            data: {
+                                replace: {
+                                    pathname: ids[0],
+                                    link: $(this).data("link")
+                                }
+                            }
+                        }
+                    })
+                })
                 const result = {
                     list: [{
                         vod_id: ids[0],
@@ -157,16 +179,21 @@ console.log(JSON.stringify(GM_info));
                         vod_content: vodContent,
                         vod_play_data: [{
                             from: "Supjav",
-                            url: [{
-                                name: "1080P",
-                                value: {
-                                    type: "match"
-                                }
-                            }]
+                            url: playUrl
                         }]
                     }]
                 };
                 return result
+            },
+            playerContent: function (flag, id, vipFlags) {
+                let link = window.location.hash.split("#").at(1);
+                document.querySelector(`.video-wrap .btn-server[data-link='${link}']`).dispatchEvent(new Event("click"));
+                return {
+                    type: "match",
+                    data: {
+                        url: link
+                    }
+                };
             },
             searchContent: function (key, quick, pg) {
                 const result = {
@@ -181,7 +208,7 @@ console.log(JSON.stringify(GM_info));
             }
         };
     })();
-    $(window).load(function () {
+    $(unsafeWindow).on("load", function () {
         const result = GmSpider[GMSpiderArgs.fName](...GMSpiderArgs.fArgs);
         console.log(result);
         if (typeof GmSpiderInject !== 'undefined') {
