@@ -16,7 +16,7 @@ console.log(JSON.stringify(GM_info));
         GMSpiderArgs.fName = args.shift();
         GMSpiderArgs.fArgs = args;
     } else {
-        GMSpiderArgs.fName = "detailContent";
+        GMSpiderArgs.fName = "searchContent";
         GMSpiderArgs.fArgs = [["ssni-748"]];
     }
     Object.freeze(GMSpiderArgs);
@@ -140,7 +140,7 @@ console.log(JSON.stringify(GM_info));
                     pagecount: 1
                 };
                 result.list = listVideos(".card-video");
-                result.pagecount = $('.pagination__list li[class] .pagination__item:last').text().trim();
+                result.pagecount = Math.ceil($('.title--sub-title').text().replace(/[^0-9]/ig, "") / 24)
                 return result;
             }
         };

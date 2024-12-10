@@ -219,7 +219,7 @@ console.log(JSON.stringify(GM_info));
                     page: pg,
                     pagecount: 0
                 };
-                result.list = pageList();
+                result.list = pageList("#page-list .box-item-list .box-item");
                 result.pagecount = Math.ceil(parseInt($("#page-list .section-title .text-muted").text().replace(",", "")) / 12);
                 return result;
             }

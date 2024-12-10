@@ -6,7 +6,7 @@
       "name": "Jable",
       "type": 3,
       "searchable": 1,
-      "changeable": 0,
+      "changeable": 1,
       "style": {
         "type": "rect",
         "ratio": 1.48
@@ -55,7 +55,7 @@
       "name": "123AV",
       "type": 3,
       "searchable": 1,
-      "changeable": 0,
+      "changeable": 1,
       "style": {
         "type": "rect",
         "ratio": 1.49
@@ -103,7 +103,7 @@
       "name": "MissAV",
       "type": 3,
       "searchable": 1,
-      "changeable": 0,
+      "changeable": 1,
       "style": {
         "type": "rect",
         "ratio": 1.49
@@ -155,7 +155,7 @@
       "name": "Supjav",
       "type": 3,
       "searchable": 1,
-      "changeable": 0,
+      "changeable": 1,
       "style": {
         "type": "rect",
         "ratio": 1.48
@@ -216,7 +216,7 @@
       "name": "XOJAV",
       "type": 3,
       "searchable": 1,
-      "changeable": 0,
+      "changeable": 1,
       "style": {
         "type": "rect",
         "ratio": 1.78
@@ -249,7 +249,7 @@
             "loadUrl": "https://xojav.tv/videos/${id}"
           },
           "searchContent": {
-            "loadUrl": "https://xojav.tv/search/${key}/?mode=async&function=get_block&from=${pg:-1}"
+            "loadUrl": "https://xojav.tv/search/${key}/?mode=async&function=get_block&sort_by=most_relevant&from_videos=${pg:-1}"
           }
         }
       }
