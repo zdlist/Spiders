@@ -4,7 +4,7 @@
 // @version      2024.12.11
 // @description  NETFLAV GMSpider
 // @author       Luomo
-// @match        https://netflav5.com/*
+// @match        https://netflav.com/*
 // @require      https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.slim.min.js
 // @grant        unsafeWindow
 // ==/UserScript==
@@ -150,6 +150,7 @@ if (typeof unsafeWindow.gmSpiderRunning === "undefined") {
                                     vod_tag: "folder"
                                 })
                             });
+                            console.log(gotItems.length,$(".video_grid_container .grid_0_cell").length);
                             if (gotItems.length === $(".video_grid_container .grid_0_cell").length) {
                                 gotItems.forEach(function (media) {
                                     result.list.push({
@@ -161,8 +162,8 @@ if (typeof unsafeWindow.gmSpiderRunning === "undefined") {
                                 })
                             } else {
                                 return new Promise(function (resolve) {
-                                    itemCount = $(".video_grid_container .grid_0_cell").length;
                                     _gotHookFunction = resolve;
+                                    itemCount = $(".video_grid_container .grid_0_cell").length;
                                 }).then((items) => {
                                     items.forEach(function (media) {
                                         result.list.push({
