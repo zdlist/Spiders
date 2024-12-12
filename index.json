@@ -73,7 +73,9 @@
           ]
         },
         "playUrlMatch": [
-          "https://*/*/master.m3u8*"
+          "https://*/*/master.m3u8*",
+          "https://*/*/v.mp4",
+          "https://*/*/playlist.m3u8*"
         ],
         "spider": {
           "homeContent": {

@@ -9,7 +9,7 @@
 // @grant        unsafeWindow
 // ==/UserScript==
 console.log(JSON.stringify(GM_info));
-if(typeof unsafeWindow.gmSpiderRunning === "undefined") {
+if (typeof unsafeWindow.gmSpiderRunning === "undefined") {
     unsafeWindow.gmSpiderRunning = true;
     (function () {
         const GMSpiderArgs = {};
@@ -66,16 +66,25 @@ if(typeof unsafeWindow.gmSpiderRunning === "undefined") {
             return {
                 homeContent: function (filter) {
                     let result = {
-                        class: [{type_id: "trending?", type_name: "最受欢迎"}, {
-                            type_id: "all?genre=國產AV",
-                            type_name: "国产AV"
-                        }, {type_id: "censored?", type_name: "有码影片"}, {
-                            type_id: "uncensored?",
-                            type_name: "无码影片"
-                        }, {type_id: "chinese-sub?", type_name: "中文字幕"}, {
-                            type_id: "browse?",
-                            type_name: "年度精选"
-                        }, {type_id: "genre?", type_name: "类别"},], filters: {
+                        class: [
+                            {
+                                type_id: "trending?",
+                                type_name: "最受欢迎"
+                            },
+                            {type_id: "chinese-sub?", type_name: "中文字幕"}, {
+                                type_id: "browse?",
+                                type_name: "年度精选"
+                            },
+                            {
+                                type_id: "all?genre=國產AV",
+                                type_name: "国产AV"
+                            },
+                            {type_id: "censored?", type_name: "有码影片"}, {
+                                type_id: "uncensored?",
+                                type_name: "无码影片"
+                            },
+                            {type_id: "genre?", type_name: "类别"}],
+                        filters: {
                             "trending?": [{
                                 key: "range", name: "时间", value: [{
                                     n: "全部", v: ""
@@ -116,29 +125,29 @@ if(typeof unsafeWindow.gmSpiderRunning === "undefined") {
                     } else if (tid === "browse?") {
                         result.list.push(
                             {
-                                vod_id: "2024?", vod_name: "2024年度精选", vod_tag: "folder"
+                                vod_id: "2024?", vod_name: "2024年度精选", vod_remarks: "年度精选", vod_tag: "folder"
                             }, {
-                                vod_id: "2023?", vod_name: "2023年度精选", vod_tag: "folder"
+                                vod_id: "2023?", vod_name: "2023年度精选", vod_remarks: "年度精选", vod_tag: "folder"
                             }, {
-                                vod_id: "2022?", vod_name: "2022年度精选", vod_tag: "folder"
+                                vod_id: "2022?", vod_name: "2022年度精选", vod_remarks: "年度精选", vod_tag: "folder"
                             }, {
-                                vod_id: "2021?", vod_name: "2021年度精选", vod_tag: "folder"
+                                vod_id: "2021?", vod_name: "2021年度精选", vod_remarks: "年度精选", vod_tag: "folder"
                             }, {
-                                vod_id: "2020?", vod_name: "2020年度精选", vod_tag: "folder"
+                                vod_id: "2020?", vod_name: "2020年度精选", vod_remarks: "年度精选", vod_tag: "folder"
                             }, {
-                                vod_id: "2019?", vod_name: "2019年度精选", vod_tag: "folder"
+                                vod_id: "2019?", vod_name: "2019年度精选", vod_remarks: "年度精选", vod_tag: "folder"
                             });
                         const formatData = JSON.parse($("#__NEXT_DATA__").html());
                         formatData.props.initialState.randomShareList.docs.forEach(function (share) {
                             result.list.push({
                                 vod_id: `share?c=${share.shareCode}`,
                                 vod_name: share.shareCode,
+                                vod_remarks: "片单",
                                 vod_pic: share.srcs[0],
                                 vod_tag: "folder"
                             })
                         });
                     } else {
-                        unsafeWindow.$ = $;
                         const formatData = JSON.parse($("#__NEXT_DATA__").html());
                         const key = tid.split("?").at(0).split("-").at(0);
                         if ($.isNumeric(key)) {
@@ -146,11 +155,12 @@ if(typeof unsafeWindow.gmSpiderRunning === "undefined") {
                                 result.list.push({
                                     vod_id: $(this).attr("href").substring(1),
                                     vod_name: $(this).find(".playlist_head div").eq(1).text().trim(),
+                                    vod_remarks: "片单",
                                     vod_pic: $(this).find("img").eq(1).attr("src"),
                                     vod_tag: "folder"
                                 })
                             });
-                            if(gotItems.length ===$(".video_grid_container .grid_0_cell").length) {
+                            if (gotItems.length === $(".video_grid_container .grid_0_cell").length) {
                                 gotItems.forEach(function (media) {
                                     result.list.push({
                                         vod_id: media.videoId,
@@ -159,7 +169,7 @@ if(typeof unsafeWindow.gmSpiderRunning === "undefined") {
                                         vod_remarks: media.duration,
                                     })
                                 })
-                            }else {
+                            } else {
                                 return new Promise(function (resolve) {
                                     itemCount = $(".video_grid_container .grid_0_cell").length;
                                     _gotHookFunction = resolve;
@@ -198,32 +208,19 @@ if(typeof unsafeWindow.gmSpiderRunning === "undefined") {
                         }
                     })
                     video?.srcs.forEach(function (src, index) {
-                        if (index === 0) {
-                            playUrl.push({
-                                name: `播放源${index + 1}`,
-                                value: {
-                                    type: "match",
-                                    data: {
-                                        url: src
+                        playUrl.push({
+                            name: `播放源${index + 1}`,
+                            value: {
+                                type: "webview",
+                                data: {
+                                    replace: {
+                                        vod_id: video.videoId,
+                                        src: index + 1
                                     }
                                 }
-                            });
-                        } else {
-                            playUrl.push({
-                                name: `播放源${index + 1}`,
-                                value: {
-                                    type: "webview",
-                                    data: {
-                                        replace: {
-                                            vod_id: video.videoId,
-                                            src: index + 1
-                                        }
-                                    }
-                                }
-                            });
-                        }
+                            }
+                        });
                     })
-
                     return vod = {
                         vod_id: video.videoId,
                         vod_name: video.code,
@@ -265,7 +262,6 @@ if(typeof unsafeWindow.gmSpiderRunning === "undefined") {
             }
         });
     })();
-}
-else {
+} else {
     console.log("gmSpider run again");
 }
