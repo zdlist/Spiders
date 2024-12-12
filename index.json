@@ -79,19 +79,19 @@
         ],
         "spider": {
           "homeContent": {
-            "loadUrl": "https://netflav5.com/trending"
+            "loadUrl": "https://netflav.com/trending"
           },
           "categoryContent": {
-            "loadUrl": "https://netflav5.com/${tid}&page=${pg:-1}${range:-}"
+            "loadUrl": "https://netflav.com/${tid}&page=${pg:-1}${range:-}"
           },
           "detailContent": {
-            "loadUrl": "https://netflav5.com/video?id=${id}/"
+            "loadUrl": "https://netflav.com/video?id=${id}/"
           },
           "playerContent": {
-            "loadUrl": "https://netflav5.com/video?id=${vod_id}#${src}"
+            "loadUrl": "https://netflav.com/video?id=${vod_id}#${src}"
           },
           "searchContent": {
-            "loadUrl": "https://netflav5.com/search?keyword=${key}&page=${pg:-1}&type=title"
+            "loadUrl": "https://netflav.com/search?keyword=${key}&page=${pg:-1}&type=title"
           }
         }
       }
