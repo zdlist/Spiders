@@ -67,9 +67,6 @@
         "webViewSettings": {
           "blockNetworkImage": true,
           "blockList": [
-            "*.ico*",
-            "*.png*",
-            "*.css*",
             "https://*.googletagmanager.com/*",
             "https://*.imkirh.com/*",
             "https://*.xlvirdr.com/*"
