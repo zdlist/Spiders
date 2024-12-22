@@ -174,7 +174,6 @@ console.log(JSON.stringify(GM_info));
                 return result;
             },
             detailContent: function (ids) {
-                const playUrl = $("#player iframe").get(0).src;
                 let detail = {};
                 $("#details .detail-item div").each(function (item) {
                     const key = $(this).find("span:first").text().replace(":", "");
@@ -200,14 +199,9 @@ console.log(JSON.stringify(GM_info));
                     vod_content: $(".justify-content-between.align-items-start h1").text().trim(),
                     vod_play_data: [{
                         from: "123AV",
-                        url: [{
+                        media: [{
                             name: "720P",
-                            value: {
-                                type: "match",
-                                data: {
-                                    url: playUrl
-                                }
-                            }
+                            type: "match"
                         }]
                     }]
                 };
