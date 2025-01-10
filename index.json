@@ -133,10 +133,10 @@
         ],
         "spider": {
           "homeContent": {
-            "loadUrl": "https://123av.com/zh/"
+            "loadUrl": "https://123av.com/zh/dm1"
           },
           "categoryContent": {
-            "loadUrl": "https://123av.com/zh/${tid}?page=${pg:-1}${filter:-}${sort:-}"
+            "loadUrl": "https://123av.com/zh/dm1/${tid}?page=${pg:-1}${filter:-}${sort:-}"
           },
           "detailContent": {
             "loadUrl": "https://123av.com/zh/v/${id}"
@@ -185,16 +185,16 @@
         },
         "spider": {
           "homeContent": {
-            "loadUrl": "https://missav.com/cn/"
+            "loadUrl": "https://missav.ws/cn/"
           },
           "categoryContent": {
-            "loadUrl": "https://missav.com/cn/${tid}?page=${pg:-1}${filter:-}${sort:-}"
+            "loadUrl": "https://missav.ws/cn/${tid}?page=${pg:-1}${filter:-}${sort:-}"
           },
           "detailContent": {
-            "loadUrl": "https://missav.com/cn/${id}"
+            "loadUrl": "https://missav.ws/cn/${id}"
           },
           "searchContent": {
-            "loadUrl": "https://missav.com/cn/search/${key}?page=${pg:-1}"
+            "loadUrl": "https://missav.ws/cn/search/${key}?page=${pg:-1}"
           }
         }
       }
