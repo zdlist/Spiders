@@ -6,6 +6,7 @@
 // @author       Luomo
 // @match        https://supjav.com/*
 // @require      https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js
+// @grant        GM_cookie
 // @grant        unsafeWindow
 // ==/UserScript==
 console.log(JSON.stringify(GM_info));
@@ -16,7 +17,7 @@ console.log(JSON.stringify(GM_info));
         GMSpiderArgs.fName = args.shift();
         GMSpiderArgs.fArgs = args;
     } else {
-        GMSpiderArgs.fName = "detailContent";
+        GMSpiderArgs.fName = "homeContent";
         GMSpiderArgs.fArgs = ["tag"];
     }
     Object.freeze(GMSpiderArgs);
@@ -28,12 +29,21 @@ console.log(JSON.stringify(GM_info));
                 itemList.push({
                     vod_id: url.pathname.split('/').at(2),
                     vod_name: $(this).find(".img").attr("title"),
-                    vod_pic: $(this).find("img").data("original"),
+                    vod_pic: formatImgUrl($(this).find("img").data("original")),
                     vod_remarks: $(this).find(".date").text(),
                     vod_year: $(this).find(".meta").children().remove().end().text()
                 })
             });
             return itemList;
+        }
+
+        function formatImgUrl(url) {
+            GM_cookie.list({name: "cf_clearance"}, function (cookies, error) {
+                if (!error) {
+                    url = url + "@User-Agent=" + window.navigator.userAgent + "@Cookie=cf_clearance=" + cookies[0].value;
+                }
+            });
+            return url;
         }
 
         return {
@@ -175,7 +185,7 @@ console.log(JSON.stringify(GM_info));
                     list: [{
                         vod_id: ids[0],
                         vod_name: vodName,
-                        vod_pic: $(".post-meta .img").attr("src"),
+                        vod_pic: formatImgUrl($(".post-meta .img").attr("src")),
                         vod_actor: vodActor.join(" "),
                         vod_remarks: tags.join(" "),
                         vod_content: vodContent,
