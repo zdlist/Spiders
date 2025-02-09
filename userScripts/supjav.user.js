@@ -37,12 +37,25 @@ console.log(JSON.stringify(GM_info));
             return itemList;
         }
 
+        let cf_clearance = null;
+
         function formatImgUrl(url) {
-            GM_cookie.list({name: "cf_clearance"}, function (cookies, error) {
-                if (!error) {
-                    url = url + "@User-Agent=" + window.navigator.userAgent + "@Cookie=cf_clearance=" + cookies[0].value;
-                }
-            });
+            if (cf_clearance === null) {
+                GM_cookie.list({name: "cf_clearance"}, function (cookies, error) {
+                    if (!error && cookies.length > 0) {
+                        cf_clearance = cookies[0].value;
+                        localStorage.setItem("cf_clearance", cf_clearance);
+                    } else {
+                        let cache_cf_clearance = localStorage.getItem("cf_clearance");
+                        if (typeof cache_cf_clearance !== "undefined" && cache_cf_clearance !== null && cache_cf_clearance.length > 0) {
+                            cf_clearance = cache_cf_clearance;
+                        }
+                    }
+                });
+            }
+            if (cf_clearance !== null) {
+                url = url + "@User-Agent=" + window.navigator.userAgent + "@Cookie=cf_clearance=" + cf_clearance;
+            }
             return url;
         }
 
