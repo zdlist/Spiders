@@ -16,7 +16,7 @@ console.log(JSON.stringify(GM_info));
         GMSpiderArgs.fName = args.shift();
         GMSpiderArgs.fArgs = args;
     } else {
-        GMSpiderArgs.fName = "detailContent";
+        GMSpiderArgs.fName = "homeContent";
         GMSpiderArgs.fArgs = ["tags"];
     }
     Object.freeze(GMSpiderArgs);
@@ -123,6 +123,14 @@ console.log(JSON.stringify(GM_info));
                     },
                     list: []
                 };
+                result.class.map(item=>{
+                    $("#nav a").each(function () {
+                        if($(this).attr("href").endsWith(item.type_id)){
+                            item.type_id=$(this).attr("href")
+                            return false
+                        }
+                    });
+                })
                 let itemList = pageList(".box-item-list .box-item:not(.splide__slide)");
                 result.list = itemList.filter((item, index) => {
                     return itemList.findIndex(i => i.vod_id === item.vod_id) === index

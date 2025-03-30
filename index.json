@@ -1,5 +1,5 @@
 {
-  "spider": "./Spiders-Lib/GM.jar;md5;7dd67a73e49dbf1cd32f56e329fce7b3",
+  "spider": "./Spiders-Lib/GM.jar;md5;875ce871703d1c382e0498711b9d3ba0",
   "sites": [
     {
       "key": "Jable",
@@ -133,10 +133,10 @@
         ],
         "spider": {
           "homeContent": {
-            "loadUrl": "https://123av.com/zh/dm3"
+            "loadUrl": "https://123av.com/zh/"
           },
           "categoryContent": {
-            "loadUrl": "https://123av.com/zh/dm1/${tid}?page=${pg:-1}${filter:-}${sort:-}"
+            "loadUrl": "https://123av.com/zh/${tid}?page=${pg:-1}${filter:-}${sort:-}"
           },
           "detailContent": {
             "loadUrl": "https://123av.com/zh/v/${id}"
