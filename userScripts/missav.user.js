@@ -130,6 +130,9 @@ console.log(JSON.stringify(GM_info));
                     class: [
                         {type_id: "new", type_name: "所有影片"},
                         {type_id: "madou", type_name: "麻豆传媒"},
+                        {type_id: "today-hot", type_name: "今日热门"},
+                        {type_id: "weekly-hot", type_name: "本周热门"},
+                        {type_id: "monthly-hot", type_name: "本月热门"},
                         {type_id: "chinese-subtitle", type_name: "中文字幕"},
                         {type_id: "uncensored-leak", type_name: "无码流出"},
                         {type_id: "actresses/ranking", type_name: "热门女优"},
