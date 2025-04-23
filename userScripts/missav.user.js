@@ -134,20 +134,28 @@ console.log(JSON.stringify(GM_info));
                         {type_id: "weekly-hot", type_name: "本周热门"},
                         {type_id: "monthly-hot", type_name: "本月热门"},
                         {type_id: "chinese-subtitle", type_name: "中文字幕"},
-                        {type_id: "uncensored-leak", type_name: "无码流出"},
                         {type_id: "actresses/ranking", type_name: "热门女优"},
+                        {type_id: "release", type_name: "新作上映"},
+                        {type_id: "uncensored-leak", type_name: "无码流出"},
                         {type_id: "makers", type_name: "发行商"},
                         {type_id: "genres", type_name: "类型"},
                         {type_id: "klive", type_name: "韩国直播"},
+                        {type_id: "clive", type_name: "中国直播"},
                     ],
                     filters: {
                         "new": defaultFilter,
                         "madou": defaultFilter,
+                        "today-hot": defaultFilter,
+                        "weekly-hot": defaultFilter,
+                        "monthly-hot": defaultFilter,
                         "chinese-subtitle": defaultFilter,
+                        "release": defaultFilter,
                         "uncensored-leak": defaultFilter,
                         "actresses/ranking": defaultFilter,
                         "makers": defaultFilter,
-                        "genres": defaultFilter
+                        "genres": defaultFilter,
+                        "klive": defaultFilter,
+                        "clive": defaultFilter
                     },
                     list: []
                 };
