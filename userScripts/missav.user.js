@@ -138,6 +138,7 @@ console.log(JSON.stringify(GM_info));
                         {type_id: "actresses/ranking", type_name: "热门女优"},
                         {type_id: "makers", type_name: "发行商"},
                         {type_id: "genres", type_name: "类型"},
+                        {type_id: "klive", type_name: "韩国直播"},
                     ],
                     filters: {
                         "new": defaultFilter,
