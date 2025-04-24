@@ -188,16 +188,16 @@
         },
         "spider": {
           "homeContent": {
-            "loadUrl": "https://missav.ws/cn/"
+            "loadUrl": "https://missav.ai/cn/"
           },
           "categoryContent": {
-            "loadUrl": "https://missav.ws/cn/${tid}?page=${pg:-1}${filter:-}${sort:-}"
+            "loadUrl": "https://missav.ai/cn/${tid}?page=${pg:-1}${filter:-}${sort:-}"
           },
           "detailContent": {
-            "loadUrl": "https://missav.ws/cn/${id}"
+            "loadUrl": "https://missav.ai/cn/${id}"
           },
           "searchContent": {
-            "loadUrl": "https://missav.ws/cn/search/${key}?page=${pg:-1}"
+            "loadUrl": "https://missav.ai/cn/search/${key}?page=${pg:-1}"
           }
         }
       }
